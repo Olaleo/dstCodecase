@@ -53,11 +53,11 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
             })
     }
 
-    private val contactsLiveData: Map<String, LiveData<List<Table>>> = lazyMap { subjectId ->
+    private val tables: Map<String, LiveData<List<Table>>> = lazyMap { subjectId ->
         val liveData = MutableLiveData<List<Table>>()
         getTablesOfSubject(subjectId) { liveData.value = it }
         return@lazyMap liveData
     }
 
-    fun tables(subjectId: String): LiveData<List<Table>> = contactsLiveData.getValue(subjectId)
+    fun tables(subjectId: String): LiveData<List<Table>> = tables.getValue(subjectId)
 }
